@@ -26,22 +26,6 @@ $this->title = 'Transactions';
         echo "Sorry you can't see this";
     } else {
 
-    $unconfirmedTransactions = new ActiveDataProvider([
-        'query' => Transaction::find()->where(['ready' => '0']),
-        'sort'=> ['defaultOrder' => ['timestamp'=>SORT_DESC]],
-        'pagination' => [
-            'pageSize' => 20,
-        ],
-    ]);
-
-    $confirmedTransactions = new ActiveDataProvider([
-        'query' => Transaction::find()->where(['ready' => '1']),
-        'sort'=> ['defaultOrder' => ['timestamp'=>SORT_DESC]],
-        'pagination' => [
-            'pageSize' => 20,
-        ],
-    ]);
-
     if(Yii::$app->request->get('id')){
         $m = Transaction::findOne(Yii::$app->request->get('id'));
         if ($m->ready == 0) {

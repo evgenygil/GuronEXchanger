@@ -35,12 +35,25 @@ class TransactionController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Transaction::find(),
+        $unconfirmedTransactions = new ActiveDataProvider([
+            'query' => Transaction::find()->where(['ready' => '0']),
+            'sort'=> ['defaultOrder' => ['timestamp'=>SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        $confirmedTransactions = new ActiveDataProvider([
+            'query' => Transaction::find()->where(['ready' => '1']),
+            'sort'=> ['defaultOrder' => ['timestamp'=>SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 20,
+            ],
         ]);
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'unconfirmedTransactions' => $unconfirmedTransactions,
+            'confirmedTransactions' => $confirmedTransactions
         ]);
     }
 
