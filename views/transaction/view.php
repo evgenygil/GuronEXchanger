@@ -38,6 +38,6 @@ $this->title = $model->id;
             'timestamp'
         ],
     ]) ?>
-    <?= Html::a('All OK', 'http://guronex/web/index.php?r=transaction%2Fcreate', ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('All OK', 'http://guronexchanger/web/index.php?r=transaction%2Fcreate', ['class' => 'btn btn-primary']) ?>
 
 </div>
