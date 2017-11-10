@@ -38,6 +38,16 @@ $this->title = $model->id;
             'timestamp'
         ],
     ]) ?>
+
+    <?= Html::tag('h3', 'Your requisites: ') ?>
+
+    <?= Html::tag('pre', '
+    SBERBANK
+    Олим Абдурафикович  Х
+    5469 5500 2723 8135', ['style' => 'font-family: Verdana; font-size: 14px; background-color: #FCFCFC; width: 300px'])?>
+
     <?= Html::a('All OK', ['transaction/create'], ['class' => 'btn btn-primary']) ?>
+
+
 
 </div>
