@@ -77,9 +77,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Guron <?= date('Y') ?></p>
+<!--        <p class="pull-left">&copy; Guron --><?//= date('Y') ?><!--</p>-->
 
-        <p class="pull-right">Powered by CustomCoding</p>
+<!--        <p class="pull-right">Powered by CustomCoding</p>-->
     </div>
 </footer>
 
