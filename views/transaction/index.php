@@ -12,22 +12,17 @@ use yii\grid\GridView;
 $this->title = 'Transactions';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="transaction-index">
+<div class="transaction-index row col-lg-10">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-<!--        --><?//= Html::a('Create Transaction', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+    <h2><?= Html::encode($this->title) ?></h2>
     <?php
 
     if (Yii::$app->user->isGuest) {
         echo "Sorry you can't see this";
     } else {
 
-    if(Yii::$app->request->get('id')){
-        $m = Transaction::findOne(Yii::$app->request->get('id'));
+    if(Yii::$app->request->get('idct') && Yii::$app->request->get('action') == 'confirm'){
+        $m = Transaction::findOne(Yii::$app->request->get('idct'));
         if ($m->ready == 0) {
             $m->ready = 1;
             $m->save();
@@ -37,7 +32,7 @@ $this->title = 'Transactions';
     ?>
 
     <div class="site-about">
-        <h3>Transactions to confirm:</h3>
+        <h4>Transactions to confirm:</h4>
     </div>
 
     <?php
@@ -47,10 +42,10 @@ $this->title = 'Transactions';
         echo GridView::widget([
             'dataProvider' => $unconfirmedTransactions,
             'filterModel' => $searchModel,
+            'tableOptions' => [
+                'class' => 'table table-condensed table-striped small',
+            ],
             'columns' => [
-                /**
-                 * Перечисленные ниже поля модели отображаются как колонки с данными без изменения
-                 */
                 'id',
                 'hash',
                 'currency',
@@ -59,25 +54,13 @@ $this->title = 'Transactions';
                 'user',
                 'timestamp',
                 'ready',
-                /**
-                 * Произвольная колонка с определенной логикой отображения и фильтром в виде выпадающего списка
-                 */
                 [
-                    /**
-                     * Указываем класс колонки
-                     */
                     'class' => \yii\grid\ActionColumn::class,
-                    /**
-                     * Определяем набор кнопочек. По умолчанию {view} {update} {delete}
-                     */
                     'header' => 'Confirm',
                     'template' => '{update}',
                     'buttons' => [
                         'update' => function ($url, $model) {
-//                    return Html::mailto('gil707@gmail.com', 'gil707@gmail.com', []);
-                            return Html::a('<img src=./img/tick.png>', 'index.php?r=transaction%2Findex&id=' . $model->id, []);
-//                    return \yii\helpers\Html::a('Update', '/set_k',
-//                        ['class' => 'send', 'data-id' => $model->id]);
+                            return Html::a('<span class="glyphicon glyphicon-ok-circle"></span>', '/transaction/index?action=confirm&idct=' . $model->id, []);
                         },
                     ]
                 ],
@@ -91,6 +74,9 @@ $this->title = 'Transactions';
                     'content' => GridView::widget([
                         'dataProvider' => $confirmedTransactions,
                         'filterModel' => $searchModel,
+                        'tableOptions' => [
+                            'class' => 'table table-condensed table-striped small',
+                            ],
                         'columns' => [
                             'id',
                             'hash',

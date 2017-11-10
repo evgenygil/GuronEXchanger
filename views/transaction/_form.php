@@ -20,12 +20,7 @@ $currencyes = [
 
     <?php $form = ActiveForm::begin(); ?>
 
-<!--    --><?//= $form->field($model, 'hash')->textInput(['maxlength' => true]) ?>
-
-
     <?= $form->field($model, 'user')->textInput(['maxlength' => true]) ?>
-<!--    --><?//= $form->field($model, 'timestamp')->textInput() ?>
-<!--    --><?//= $form->field($model, 'ready')->textInput() ?>
     <?= $form->field($model, 'bank')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'currency')->dropDownList($currencyes, ['prompt' => 'Specify currency...']) ?>
     <?= $form->field($model, 'value')->textInput() ?>
