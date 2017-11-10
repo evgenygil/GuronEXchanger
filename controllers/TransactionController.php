@@ -79,12 +79,11 @@ class TransactionController extends Controller
         $model = new Transaction();
 
         $model->timestamp = date("Y-m-d H:i:s");
-        $model->hash = md5(round(microtime(true) * 1000));
+//        $model->hash = md5(round(microtime(true) * 1000));
+        $model->hash = md5(substr(base64_encode(sha1(mt_rand())), 0, 32));
         $model->ready = 0;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

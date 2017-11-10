@@ -21,6 +21,12 @@ body {
     padding-top: 20px;
 }
 
+.darktable {
+    border-top: 1px solid #ffffff;
+    background-color: #333333;
+    color: #333333;
+}
+
 .jumbotron {
     text-align: center;
     background-color: transparent;

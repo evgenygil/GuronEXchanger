@@ -43,7 +43,7 @@ $this->title = 'Transactions';
             'dataProvider' => $unconfirmedTransactions,
             'filterModel' => $searchModel,
             'tableOptions' => [
-                'class' => 'table table-condensed table-striped small',
+                'class' => 'table table-condensed table-striped medium',
             ],
             'columns' => [
                 'id',
@@ -53,7 +53,7 @@ $this->title = 'Transactions';
                 'bank',
                 'user',
                 'timestamp',
-                'ready',
+//                'ready',
                 [
                     'class' => \yii\grid\ActionColumn::class,
                     'header' => 'Confirm',
@@ -75,7 +75,7 @@ $this->title = 'Transactions';
                         'dataProvider' => $confirmedTransactions,
                         'filterModel' => $searchModel,
                         'tableOptions' => [
-                            'class' => 'table table-condensed table-striped small',
+                            'class' => 'table table-condensed table-striped medium',
                             ],
                         'columns' => [
                             'id',
