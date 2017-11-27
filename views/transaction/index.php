@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Currencies;
 use app\models\Transaction;
 use yii\bootstrap\Collapse;
 use yii\data\ActiveDataProvider;
@@ -12,7 +13,8 @@ use yii\grid\GridView;
 $this->title = 'Transactions';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="transaction-index row col-lg-10">
+<div class="row">
+<div class="transaction-index row col-lg-12">
 
     <h2><?= Html::encode($this->title) ?></h2>
     <?php
@@ -48,7 +50,28 @@ $this->title = 'Transactions';
             'columns' => [
                 'id',
                 'hash',
-                'currency',
+                [
+                    'attribute' => 'currency',
+                    'label' => 'From',
+                    'value' => function($data) {
+                        return Currencies::findOne($data->currency)->value;
+                    }
+                ],
+                [
+                    'attribute' => 'type',
+                    'label' => 'Act',
+                    'value' => function($data) {
+                        return ($data->type == 1) ? 'Sell' : 'Buy';
+                    }
+                ],
+                [
+                    'attribute' => 'currency_chng',
+                    'label' => 'To',
+                    'value' => function($data) {
+                        return Currencies::findOne($data->currency_chng)->value;
+
+                    }
+                ],
                 'value',
                 'bank',
                 'user',
@@ -56,7 +79,7 @@ $this->title = 'Transactions';
 //                'ready',
                 [
                     'class' => \yii\grid\ActionColumn::class,
-                    'header' => 'Confirm',
+                    'header' => '',
                     'template' => '{update}',
                     'buttons' => [
                         'update' => function ($url, $model) {
@@ -80,7 +103,28 @@ $this->title = 'Transactions';
                         'columns' => [
                             'id',
                             'hash',
-                            'currency',
+                            [
+                                'attribute' => 'currency',
+                                'label' => 'From',
+                                'value' => function($data) {
+                                    return Currencies::findOne($data->currency)->value;
+                                }
+                            ],
+                            [
+                                'attribute' => 'type',
+                                'label' => 'Act',
+                                'value' => function($data) {
+                                    return ($data->type == 1) ? 'Sell' : 'Buy';
+                                }
+                            ],
+                            [
+                                'attribute' => 'currency_chng',
+                                'label' => 'To',
+                                'value' => function($data) {
+                                    return Currencies::findOne($data->currency_chng)->value;
+
+                                }
+                            ],
                             'value',
                             'bank',
                             'user',
@@ -95,5 +139,5 @@ $this->title = 'Transactions';
     }
 
     ?>
-
+</div>
 </div>
